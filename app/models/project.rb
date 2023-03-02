@@ -1,9 +1,6 @@
 class Project < ActiveRecord::Base
-    has_many :projects
-    has_many :skills
-
-    #include Bcrypt  
-    has_secure_password
+  has_many :project_memberships
+  has_many :users, through: :project_memberships
   
    
   end
