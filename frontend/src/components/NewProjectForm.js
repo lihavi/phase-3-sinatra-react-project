@@ -1,72 +1,47 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 function NewProjectForm({ onCreate }) {
-  const [name, setName] = useState('');
+  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [members, setMembers] = useState('');
-  const history = useHistory();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const response = await fetch('/projects', {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch('http://localhost:9292/projects', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, description, members: members.split(',') }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title, description }),
     });
-    const data = await response.json();
-    onCreate(data);
-    history.push('/dashboard');
+    const newProject = await response.json();
+    onCreate(newProject);
+    setTitle('');
+    setDescription('');
   };
 
   return (
-    <div className="container mt-5">
-      <h1>New Project</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="description" className="form-label">
-            Description
-          </label>
-          <textarea
-            className="form-control"
-            id="description"
-            rows="3"
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-            required
-          ></textarea>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="members" className="form-label">
-            Members (separated by commas)
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="members"
-            value={members}
-            onChange={(event) => setMembers(event.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Create
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="title">Title:</label>
+        <input
+          id="title"
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="description">Description:</label>
+        <textarea
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit">Create Project</button>
+    </form>
   );
 }
 

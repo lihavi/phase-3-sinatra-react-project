@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Switch, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Dashboard from './components/Dashboard';
 import ProjectList from './components/ProjectList';
 import NewProjectForm from './components/NewProjectForm';
@@ -36,9 +37,10 @@ function App() {
   };
 
   return (
-    <Router>
-      <Navbar />
-      <Switch>
+    <BrowserRouter>
+    <Routes>
+      <Navbar /> 
+       <Switch> 
         <Route exact path="/">
           <Dashboard projects={projects} />
         </Route>
@@ -51,8 +53,9 @@ function App() {
         <Route exact path="/projects/:id">
           <Project onUpdate={handleUpdateProject} onDelete={handleDeleteProject} />
         </Route>
-      </Switch>
-    </Router>
+       </Switch>
+    </Routes>
+    </BrowserRouter>
   );
 }
 
