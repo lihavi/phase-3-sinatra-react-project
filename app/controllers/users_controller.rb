@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+
+  get '/users' do
+    # code to retrieve and return user data
+  end
     post '/register' do
       user = User.new(username: params[:username], email: params[:email], password: params[:password])
       if user.save

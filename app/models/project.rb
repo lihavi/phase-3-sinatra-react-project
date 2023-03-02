@@ -1,6 +1,10 @@
 class Project < ActiveRecord::Base
-    belongs_to :user
+    has_many :projects
+    has_many :skills
+
+    #include Bcrypt  
+    has_secure_password
   
-    enum status: { incomplete: 0, in_progress: 1, complete: 2 }
+   
   end
   

@@ -31,6 +31,8 @@ gem "rake", "~> 13.0"
 # Provides functionality to interact with a SQLite3 database
 gem "sqlite3", "~> 1.4"
 
+gem 'bcrypt', '~> 3.1', '>= 3.1.18'
+
 # Require all files in a folder
 gem "require_all", "~> 3.0"
 

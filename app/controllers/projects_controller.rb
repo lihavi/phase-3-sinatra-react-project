@@ -3,11 +3,11 @@ class ProjectsController < ApplicationController
       authenticate
     end
   
-    get '/' do
+    get '/projects' do
       projects = @user.projects
       projects.to_json(include: :user)
     end
   
-    post '/' do
-      project = @user.projects.build(title: params[:title], description
-  
+   # post '/' do
+      #project = @user.projects.build(title: params[:title], description)
+  end
