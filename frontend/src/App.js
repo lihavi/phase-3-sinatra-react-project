@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Dashboard from './components/Dashboard';
 import ProjectList from './components/ProjectList';
 import NewProjectForm from './components/NewProjectForm';
