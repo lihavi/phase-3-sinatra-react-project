@@ -1,6 +1,7 @@
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Projects from "./components/Projects";
 
 const App = () => {
   return (
@@ -25,12 +26,5 @@ const Home = () => {
   )
 }
 
-const Projects = () => {
-  return (
-    <div>
-      <h1>Projects Page</h1>
-    </div>
-  );
-};
 
 export default App;
