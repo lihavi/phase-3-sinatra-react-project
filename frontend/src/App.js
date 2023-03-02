@@ -1,30 +1,60 @@
-import React from "react";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Projects from "./components/Projects";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Dashboard from './components/Dashboard';
+import ProjectList from './components/ProjectList';
+import NewProjectForm from './components/NewProjectForm';
+import Project from './components/Project';
 
-const App = () => {
+function App() {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const response = await fetch('/projects');
+      const data = await response.json();
+      setProjects(data);
+    };
+    fetchProjects();
+  }, []);
+
+  const handleCreateProject = (project) => {
+    setProjects([...projects, project]);
+  };
+
+  const handleUpdateProject = (updatedProject) => {
+    const index = projects.findIndex((project) => project.id === updatedProject.id);
+    setProjects([
+      ...projects.slice(0, index),
+      updatedProject,
+      ...projects.slice(index + 1),
+    ]);
+  };
+
+  const handleDeleteProject = async (projectId) => {
+    await fetch(`/projects/${projectId}`, { method: 'DELETE' });
+    setProjects(projects.filter((project) => project.id !== projectId));
+  };
+
   return (
-    <BrowserRouter>
-      <div>
-        <Navbar/>
-        <Routes>
-        <Route exact path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route exact path="/">
+          <Dashboard projects={projects} />
+        </Route>
+        <Route exact path="/projects">
+          <ProjectList projects={projects} />
+        </Route>
+        <Route exact path="/projects/new">
+          <NewProjectForm onCreate={handleCreateProject} />
+        </Route>
+        <Route exact path="/projects/:id">
+          <Project onUpdate={handleUpdateProject} onDelete={handleDeleteProject} />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
-
-const Home = () => {
-  return(
-    <div>
-      <h1>Welcome to Project Management App!</h1>
-
-    </div>
-  )
-}
-
 
 export default App;
