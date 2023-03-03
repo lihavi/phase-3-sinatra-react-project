@@ -1,11 +1,11 @@
 puts "🌱 Seeding spices..."
 
-# Make 5 users
-5.times do
-    User.create(
-      username: Faker::Internet.username,
-      email: "#{Faker::Internet.username}@gmail.com",
-      password: Faker::Internet.password(min_length: 8),
+# Make 10 users
+10.times do
+  User.create!(
+    username: Faker::Internet.username,
+    email: "#{Faker::Internet.username}@gmail.com",
+    password: 'password'
       )
   end
   
