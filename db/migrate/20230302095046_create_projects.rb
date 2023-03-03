@@ -4,6 +4,8 @@ class CreateProjects < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :title
       t.string :description 
+
+      t.timestamps
     end
   end
 end
