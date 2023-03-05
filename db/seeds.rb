@@ -6,8 +6,7 @@ puts "🌱 Seeding spices..."
     username: Faker::Internet.username,
     email: "#{Faker::Internet.username}@gmail.com",
     password: 'password',
-    avatar_url: Faker::Avatar.image(slug: "my-own-slug", size: "30x30", format: "bmp")
-   
+    image: Faker::Avatar.image
 
       )
   end
@@ -33,8 +32,10 @@ puts "🌱 Seeding spices..."
       20.times do 
         member = Member.create(
             name: Faker::Name.name,
+            email: "#{Faker::Internet.name}@gmail.com",
             user_id: rand(1..8),
-            project_id: rand(1..20)
+            project_id: rand(1..20),
+            image: Faker::Avatar.image
             
             )
         
