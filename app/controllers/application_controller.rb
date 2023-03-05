@@ -95,8 +95,12 @@ class ApplicationController < Sinatra::Base
     project.to_json
   end
 
-   # Route for login
-   post '/login' do
+  # Route for login
+  get '/login' do
+    "Please use POST /login to login."
+  end
+
+  post '/login' do
     user = User.find_by(email: params[:email], password: params[:password])
     if user
       { message: "Login successful!" }.to_json
