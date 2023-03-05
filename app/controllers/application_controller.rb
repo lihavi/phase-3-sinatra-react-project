@@ -6,6 +6,8 @@ class ApplicationController < Sinatra::Base
   end
 
   # Add routes
+
+  #Routes for the users
   get '/users' do 
     users = User.all.order(created_at: :asc)
     users.to_json
@@ -33,7 +35,7 @@ class ApplicationController < Sinatra::Base
     user.destroy
     user.to_json
   end
-  # Members
+  # Routes for the member
   get '/members' do 
     members = Member.all.order(created_at: :asc)
     members.to_json
@@ -63,7 +65,8 @@ class ApplicationController < Sinatra::Base
     member.destroy
     member.to_json
   end
-  # Projects
+
+  # Routes for the projects
   get '/projects' do 
     projects = Project.all.order(created_at: :asc)
     projects.to_json
@@ -91,4 +94,15 @@ class ApplicationController < Sinatra::Base
     project.destroy
     project.to_json
   end
+
+   # Route for login
+   post '/login' do
+    user = User.find_by(email: params[:email], password: params[:password])
+    if user
+      { message: "Login successful!" }.to_json
+    else
+      { message: "Login failed. Invalid email or password." }.to_json
+    end
+  end
+  
 end

@@ -5,7 +5,9 @@ puts "🌱 Seeding spices..."
   User.create!(
     username: Faker::Internet.username,
     email: "#{Faker::Internet.username}@gmail.com",
-    password: 'password'
+    password: 'password',
+    avatar_url: Faker::Avatar.image(slug: "my-own-slug", size: "30x30", format: "bmp")
+   
 
       )
   end
@@ -33,7 +35,9 @@ puts "🌱 Seeding spices..."
             name: Faker::Name.name,
             user_id: rand(1..8),
             project_id: rand(1..20)
-        )
+            
+            )
+        
     
   end
 end

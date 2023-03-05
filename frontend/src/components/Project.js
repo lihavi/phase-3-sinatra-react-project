@@ -5,7 +5,7 @@ function Project({ project, onUpdate }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch(`/projects/${project.id}`, {
+    const response = await fetch(`http://localhost:9292/projects/${project.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status }),

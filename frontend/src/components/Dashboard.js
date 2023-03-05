@@ -6,7 +6,7 @@ function Dashboard() {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const response = await fetch('/projects');
+      const response = await fetch('http://localhost:9292/projects');
       const data = await response.json();
       setProjects(data);
     };
